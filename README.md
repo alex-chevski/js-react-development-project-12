@@ -1,6 +1,6 @@
 # Hexlet Chat Application
 
-[![Render Deployment](https://img.shields.io/badge/Render-Deployed-success)](https://your-project.onrender.com)
+[![Render Deployment](https://img.shields.io/badge/Render-Deployed-success)](https://chat-development.onrender.com/)
 ![Node.js Version](https://img.shields.io/badge/Node.js-20.x-green)
 ![React Version](https://img.shields.io/badge/React-18.x-blue)
 
