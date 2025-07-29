@@ -7,3 +7,9 @@ start:
 install:
 	npm install
 	cd frontend && npm install
+
+clean:
+	rm -rf node_modules
+	cd frontend && rm -rf node_modules
+
+init: install build
