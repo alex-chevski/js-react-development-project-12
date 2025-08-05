@@ -10,9 +10,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@headlessui/react": "^2.2.7",
+    "@heroicons/react": "^2.2.0",
     "@hexlet/chat-server": "^2.0.4",
+    "flowbite": "^3.1.2",
+    "flowbite-react": "^0.12.6",
     "formik": "^2.4.6",
     "react-router-dom": "^7.7.1",
     "yup": "^1.7.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
   }
 }
