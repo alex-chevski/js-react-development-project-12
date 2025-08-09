@@ -5,7 +5,7 @@ dev:
 	cd frontend && npm run dev
 
 start:
-	npx serve -s ./frontend/dist
+	npx start-server -s ./frontend/dist
 
 install:
 	npm install
