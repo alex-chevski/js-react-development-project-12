@@ -2,10 +2,10 @@ build:
 	cd frontend && npm run build
 
 dev:
-	cd frontend && npm run build
+	cd frontend && npm run dev
 
 start:
-	npx start-server -s ./frontend/dist
+	npx serve -s ./frontend/dist
 
 install:
 	npm install
