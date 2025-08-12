@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../features/auth/authSlice'
+import ErrorMessage from "../components/ErrorMessage";
 
 const Login = () => {
   const [username, setUserName] = useState('')
@@ -46,18 +47,7 @@ const Login = () => {
             </div>
           </div>
 
-
-          {error &&
-            <div class="flex items-center p-4 mb-4 text-sm text-red-800 dark:text-red-400 dark:border-red-800" role="alert">
-              <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-              </svg>
-              <span class="sr-only">Error</span>
-              <div>
-                <span class="font-medium">{error}</span>
-              </div>
-            </div>
-          }
+          <ErrorMessage error={error} />
 
           <div>
             <button type="submit" disabled={status === 'loading'} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
