@@ -1,6 +1,27 @@
 import { Link } from "react-router-dom";
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { loginUser } from '../features/auth/authSlice'
 
 const Login = () => {
+  const [username, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { status, error } = useSelector((state) => state.auth)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const result = await dispatch(loginUser({ username, password }))
+    if (loginUser.fulfilled.match(result)) {
+      navigate('/')
+    }
+  }
+
+
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -8,25 +29,40 @@ const Login = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form action="#" method="POST" className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label for="email" className="block text-sm/6 font-medium text-gray-900">Электронная почта</label>
+            <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">Имя профиля</label>
             <div className="mt-2">
-              <input id="email" type="email" name="email" required autocomplete="email" className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+              <input id="username" type="text" name="username" value={username} onChange={(e) => setUserName(e.target.value)} required autoComplete="username" className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
             </div>
           </div>
 
           <div>
             <div className="flex items-center justify-between">
-              <label for="password" className="block text-sm/6 font-medium text-gray-900">Пароль</label>
+              <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">Пароль</label>
             </div>
             <div className="mt-2">
-              <input id="password" type="password" name="password" required autocomplete="current-password" className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+              <input id="password" type="password" name="password" onChange={(e) => setPassword(e.target.value)} value={password} required autoComplete="current-password" className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
             </div>
           </div>
 
+
+          {error &&
+            <div class="flex items-center p-4 mb-4 text-sm text-red-800 dark:text-red-400 dark:border-red-800" role="alert">
+              <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+              </svg>
+              <span class="sr-only">Error</span>
+              <div>
+                <span class="font-medium">{error}</span>
+              </div>
+            </div>
+          }
+
           <div>
-            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Войти</button>
+            <button type="submit" disabled={status === 'loading'} className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              {status === 'loading' ? 'Вход...' : 'Войти'}
+            </button>
           </div>
         </form>
 
