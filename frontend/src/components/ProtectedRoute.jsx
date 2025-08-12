@@ -5,7 +5,7 @@ const ProtectedRoute = ({ children }) => {
   const { token, status } = useSelector((state) => state.auth)
 
   if (status === 'loading') return <div>Проверка авторизации...</div>
-  return token ? children : <Navigate to="/" replace />
+  return token ? children : <Navigate to="/login" replace />
 }
 
 export default ProtectedRoute
