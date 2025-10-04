@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import ProtectedRoute from '../components/ProtectedRoute.jsx'
-import Chat from '../components/Chat.jsx'
 import { logout } from '../features/auth/authSlice.jsx';
 import { useSelector, useDispatch } from 'react-redux';
+import Chat from "./Chat.jsx";
 
-const MainPage = () => {
+const Main = () => {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -47,4 +47,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Main;
