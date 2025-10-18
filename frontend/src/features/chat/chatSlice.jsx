@@ -6,7 +6,7 @@ export const fetchChannels = createAsyncThunk(
   'chat/fetchChannels',
   async (_, { getState, rejectWithValue }) => {
     try {
-      const response = await api.get('/api/v1/channels');
+      const response = await api.get('/channels');
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
@@ -20,7 +20,7 @@ export const fetchMessages = createAsyncThunk(
   'chat/fetchMessages',
   async (_, { getState, rejectWithValue }) => {
     try {
-      const response = await api.get('/api/v1/messages');
+      const response = await api.get('/messages');
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
